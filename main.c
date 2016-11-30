@@ -22,7 +22,7 @@ void main(void)
 	DCOCTL = CALDCO_1MHZ;
 	P1DIR = 0xFF;                             // Unused pins as outputs
 	P2DIR = 0xFF;                             // Unused pins as outputs
-	P1OUT = 0x00;							//Pull SCLK High
+	P1OUT = 0x20;							//Pull SCLK High
 	P2OUT = 0x00;							//
 
 
