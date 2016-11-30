@@ -17,7 +17,17 @@ char LED_ENABLE = 1;                        // LED control
 
 void main(void)
 {
-  WDTCTL = WDTPW+WDTTMSEL+WDTCNTCL+WDTSSEL; // ACLK/32768, int timer: ~10s
+	WDTCTL = WDTPW + WDTHOLD; 								// Stop WDT
+	BCSCTL1 = CALBC1_1MHZ;                    // Set DCO to 1MHz
+	DCOCTL = CALDCO_1MHZ;
+	P1DIR = 0xFF;                             // Unused pins as outputs
+	P2DIR = 0xFF;                             // Unused pins as outputs
+	P1OUT = 0xFF;							//Pull SCLK High
+	P2OUT = 0xFF;							//
+
+
+
+/*  WDTCTL = WDTPW+WDTTMSEL+WDTCNTCL+WDTSSEL; // ACLK/32768, int timer: ~10s
   BCSCTL1 = CALBC1_1MHZ;                    // Set DCO to 1MHz
   DCOCTL = CALDCO_1MHZ;
   BCSCTL3 |= LFXT1S_2;						// ACLK source VLO Clk
@@ -53,12 +63,12 @@ void main(void)
   BCSCTL1 |= DIVA_0;                        // ACLK = VLO(12khz)/1
   IE1 |= WDTIE;                             // Enable WDT interrupt
 */
-  //Initial Outputs
+/*  //Initial Outputs
   P1OUT |= SCLK;							//Pull SCLK High
   P1OUT |= SDO;
   P1OUT |= SDI;
   P2OUT |= PIR;								//Pull PIR High
-
+*/
   _BIS_SR(LPM3_bits + GIE);                 // Enter LPM3 with interrupts
 }
 
